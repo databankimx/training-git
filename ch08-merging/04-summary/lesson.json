@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Merging",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Merge a notes branch into main as a fast-forward, then print the newest subject and its parent count.",
+  "prerequisites": ["Protected Main"],
+  "resetOnCheck": true,
+  "hint": "Commit the README on main, switch to notes, add the second section, commit it, switch back to main, and git merge -q notes. Then Write-Output Latest on main: with $(git log -1 --format=%s), and the parent count as Parents: with $parents."
+}

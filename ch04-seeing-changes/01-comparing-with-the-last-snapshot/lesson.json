@@ -1,0 +1,9 @@
+{
+  "title": "Comparing with the Last Snapshot",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Commit a README, edit it without staging, and print the name of the file the diff reports.",
+  "prerequisites": ["Summary: Saving Snapshots"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main, then Set-Content for README.md, git add, and git commit -q -m \"Add practice notes\". Then Add-Content for Second section, and Write-Output with (git diff --name-only). Do not stage the edit."
+}

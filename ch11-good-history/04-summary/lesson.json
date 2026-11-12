@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Good History",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Write a commit with a body, add a second commit for another file, then print the README's history and its body.",
+  "prerequisites": ["Finding Changes in History"],
+  "resetOnCheck": true,
+  "hint": "Commit the README with -m \"Add practice notes\" -m \"Notes for the practice repository.\". Commit LICENSE.md alone. Then Write-Output (git log --format=%s -- README.md), and Body: with $((git log -1 --format=%b -- README.md).Trim())."
+}

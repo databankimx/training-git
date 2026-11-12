@@ -1,0 +1,9 @@
+{
+  "title": "Fetching and Pulling",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Have a clone push a teammate's change to the shared copy, then pull it into the original and print the history.",
+  "prerequisites": ["Cloning a Repository"],
+  "resetOnCheck": true,
+  "hint": "Set up the shared copy and the clone as before. Then Set-Location into the clone, Add-Content, git add, git commit -q, git push -q, and Set-Location back to C:\\Development\\git-practice. Then git pull -q --ff-only origin main, and Write-Output (git log --format=%s)."
+}

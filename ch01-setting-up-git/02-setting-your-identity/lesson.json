@@ -1,0 +1,9 @@
+{
+  "title": "Setting Your Identity",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Make a practice repository, set the identity inside it, and print the name Git will use.",
+  "prerequisites": ["Checking Git Is Installed"],
+  "resetOnCheck": true,
+  "hint": "Set-Location to C:\\Development\\git-practice. Then git init -q -b main. Then two git config lines for user.name and user.email, without --global. Then Write-Output with Identity: and $(git config user.name) in double quotes."
+}

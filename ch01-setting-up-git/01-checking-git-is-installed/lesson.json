@@ -1,0 +1,9 @@
+{
+  "title": "Checking Git Is Installed",
+  "runtime": "powershell",
+  "minutes": 10,
+  "objective": "Check for the Git program in a script, and print one line when it's found.",
+  "prerequisites": [],
+  "resetOnCheck": true,
+  "hint": "An if line with Get-Command git -ErrorAction SilentlyContinue as its test. Inside the braces, Write-Output with the words Git is installed."
+}

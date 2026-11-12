@@ -1,0 +1,9 @@
+{
+  "title": "Comparing What Is Staged",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Commit a README, edit it, stage the edit, and print the staged summary.",
+  "prerequisites": ["Comparing with the Last Snapshot"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main, Set-Content for README.md, git add, git commit -q -m \"Add practice notes\". Then Add-Content for Second section, git add README.md, and Write-Output with (git diff --staged --stat)."
+}

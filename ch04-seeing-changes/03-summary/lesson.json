@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Seeing Changes",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Commit a README, edit it without staging, print the changed file name, then stage it and print the staged summary.",
+  "prerequisites": ["Comparing What Is Staged"],
+  "resetOnCheck": true,
+  "hint": "Commit the README as before. Add-Content for Second section, then Write-Output Changed: with $(git diff --name-only). Then git add README.md, and Write-Output with (git diff --staged --stat)."
+}

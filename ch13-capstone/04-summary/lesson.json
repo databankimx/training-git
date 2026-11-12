@@ -1,0 +1,9 @@
+{
+  "title": "Summary: The Capstone",
+  "runtime": "powershell",
+  "minutes": 30,
+  "objective": "Repeat the whole story, then print the resolved document and the length of the main history.",
+  "prerequisites": ["Explaining the Decision"],
+  "resetOnCheck": true,
+  "hint": "Repeat the story from the last step, with the resolution committed with a subject and a body. Then Get-Content for DOCUMENT.md, and Write-Output with History: and the count of git log --first-parent --format=%s."
+}

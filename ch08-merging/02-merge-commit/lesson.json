@@ -1,0 +1,9 @@
+{
+  "title": "A Merge Commit",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Diverge two branches, merge them, and print the merge commit's subject and its parent count.",
+  "prerequisites": ["A Fast-Forward Merge"],
+  "resetOnCheck": true,
+  "hint": "Commit on main, then on notes, then back on main with a second commit on LICENSE.md. Then git merge -q --no-edit notes. Then Write-Output with (git log -1 --format=%s). Then $parents = (git rev-list --parents -n 1 HEAD).Split(\" \").Count - 1 and Write-Output Parents: with $parents."
+}

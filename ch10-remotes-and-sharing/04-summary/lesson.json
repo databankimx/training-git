@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Remotes and Sharing",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Share a repository through a bare copy, have a clone push a change, pull it back, and print the remote's name and the history.",
+  "prerequisites": ["Fetching and Pulling"],
+  "resetOnCheck": true,
+  "hint": "Follow the last step: commit the README, make shared.git, add origin, push -u, clone, change and push from the clone, then Set-Location back and git pull -q --ff-only origin main. Then Write-Output Remote: with $(git remote), and the log."
+}

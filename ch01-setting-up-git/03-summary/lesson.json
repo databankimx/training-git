@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Setting Up Git",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Check for Git, make a practice repository, set its identity, and print both results.",
+  "prerequisites": ["Setting Your Identity"],
+  "resetOnCheck": true,
+  "hint": "First the if line with Get-Command git -ErrorAction SilentlyContinue, printing Git is installed. Then Set-Location to C:\\Development\\git-practice, git init -q -b main, the two git config lines without --global, and Write-Output with Identity: and $(git config user.name)."
+}

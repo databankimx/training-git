@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Undoing Safely",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Unstage a change, print the status, discard the change, and print whether the folder is clean.",
+  "prerequisites": ["Unstaging a Change"],
+  "resetOnCheck": true,
+  "hint": "Commit the README, Add-Content for Second section, git add, then git restore --staged README.md, and Write-Output with (git status --short). Then git restore README.md. Then if (-not (git status --short)) with Write-Output Status: clean inside it."
+}

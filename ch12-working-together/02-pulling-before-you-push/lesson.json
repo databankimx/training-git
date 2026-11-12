@@ -1,0 +1,9 @@
+{
+  "title": "Pulling Before You Push",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Pull a teammate's change, commit on top of it, push, and print the history.",
+  "prerequisites": ["Checking Before You Start"],
+  "resetOnCheck": true,
+  "hint": "Set up the shared copy and the clone, and have the clone push Add teammate note. Back in the original: git pull -q --ff-only origin main, then Add-Content My note, git add, git commit -q -m \"Add my note\", git push -q, and Write-Output (git log --format=%s)."
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Aborting a Merge",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Set up a conflicting merge, abort it, and print the file and a clean status.",
+  "prerequisites": ["Resolving a Conflict"],
+  "resetOnCheck": true,
+  "hint": "Set up the two conflicting headings, then git merge --no-edit notes *> $null, then git merge --abort. Then Get-Content for the README, and an if line with -not (git status --short) printing Status: clean."
+}

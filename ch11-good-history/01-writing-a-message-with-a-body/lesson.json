@@ -1,0 +1,9 @@
+{
+  "title": "Writing a Message With a Body",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Commit with a subject and a body, then print each part of the message.",
+  "prerequisites": ["Summary: Remotes and Sharing"],
+  "resetOnCheck": true,
+  "hint": "Make the README and git add it. Then git commit -q -m \"Add practice notes\" -m \"Notes for the practice repository.\" with two -m switches. Then Write-Output Subject: with $(git log -1 --format=%s), and Body: with $((git log -1 --format=%b).Trim())."
+}

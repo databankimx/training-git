@@ -1,0 +1,9 @@
+{
+  "title": "Two Edits, One Conflict",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Make two edits to the status line on separate branches, merge both, and print the conflict status.",
+  "prerequisites": ["Starting the Document"],
+  "resetOnCheck": true,
+  "hint": "Start the document as before. Create alice from the start, edit, commit, switch to main. Create bob from main before any merge, edit the same line, commit, switch to main. Then git merge -q alice, git merge --no-edit bob *> $null, and Write-Output with (git status --short)."
+}

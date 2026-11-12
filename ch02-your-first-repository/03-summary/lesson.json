@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Your First Repository",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Make a repository, add a README, and print whether .git is there and what the short status shows.",
+  "prerequisites": ["Reading the Status"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main, then Set-Content for README.md. Then two Write-Output lines: Repository ready: with $(Test-Path \".git\"), and the short status in parentheses as (git status --short)."
+}

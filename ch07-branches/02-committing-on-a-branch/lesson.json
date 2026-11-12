@@ -1,0 +1,9 @@
+{
+  "title": "Committing on a Branch",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Commit on a notes branch, then print the current branch and the history of main.",
+  "prerequisites": ["Creating a Branch"],
+  "resetOnCheck": true,
+  "hint": "Make the first commit on main as before, then git switch -c notes. Add-Content for Second section, git add, git commit -q -m \"Add second section\". Then Write-Output Branch: with $(git branch --show-current), and Write-Output (git log main --format=%s)."
+}

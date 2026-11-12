@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Ignoring Files",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Write a .gitignore with two rules, create the files they cover, and print the status and the result of check-ignore.",
+  "prerequisites": ["Keeping Secrets Out"],
+  "resetOnCheck": true,
+  "hint": "Set-Content for .gitignore with @(\"*.log\", \"secrets.txt\") as the value. Then Set-Content for app.log, secrets.txt, and README.md. Then Write-Output with (git status --short), and again with (git check-ignore app.log)."
+}

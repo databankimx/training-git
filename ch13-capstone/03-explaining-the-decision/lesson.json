@@ -1,0 +1,9 @@
+{
+  "title": "Explaining the Decision",
+  "runtime": "powershell",
+  "minutes": 30,
+  "objective": "Resolve the status conflict with a combined text and a reason in the commit body, then print the first-parent history and the reason.",
+  "prerequisites": ["Two Edits, One Conflict"],
+  "resetOnCheck": true,
+  "hint": "Repeat the two edits and the merges from the last step. Then Set-Content with the status Status: approved, pending Alice's review, git add, and git commit -q with a subject and a second -m for the reason. Then Write-Output (git log --first-parent --format=%s), and Why: with $((git log -1 --format=%b).Trim())."
+}

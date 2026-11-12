@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Saving Snapshots",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Make two commits in the practice repository, then print their subjects, newest first.",
+  "prerequisites": ["Committing"],
+  "resetOnCheck": true,
+  "hint": "The first commit is as in the last step. Then Add-Content adds Second section to README.md, git add README.md, and git commit -q -m \"Add second section\". Then Write-Output (git log --format=%s). Newest first."
+}

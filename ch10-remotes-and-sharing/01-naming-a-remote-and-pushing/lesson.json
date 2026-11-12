@@ -1,0 +1,9 @@
+{
+  "title": "Naming a Remote and Pushing",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Make a bare repository, name it origin, push main to it, and print the remote's name.",
+  "prerequisites": ["Summary: Resolving Conflicts"],
+  "resetOnCheck": true,
+  "hint": "Make the README and commit it on main. Then git init -q --bare -b main shared.git. Then git remote add origin with the full path to shared.git, git push -q -u origin main, and Write-Output (git remote)."
+}

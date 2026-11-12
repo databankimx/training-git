@@ -1,0 +1,9 @@
+{
+  "title": "Reading a Conflict",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Set up two branches that change the same line, merge them, and print the conflicted file.",
+  "prerequisites": ["Summary: Merging"],
+  "resetOnCheck": true,
+  "hint": "Commit the heading on main, then on notes with a different heading, then back on main with a third heading. Then git merge --no-edit notes *> $null, and Get-Content of the README. The file shows the five marker lines."
+}

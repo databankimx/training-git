@@ -1,0 +1,9 @@
+{
+  "title": "Making Small Commits",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Make two commits, one per file, then print the subjects and the number of commits.",
+  "prerequisites": ["Writing a Message With a Body"],
+  "resetOnCheck": true,
+  "hint": "Commit README.md alone with git add README.md and git commit -q -m \"Add practice notes\". Then LICENSE.md alone, with its own commit. Then Write-Output (git log --format=%s), and Commits: with $(git rev-list --count HEAD)."
+}

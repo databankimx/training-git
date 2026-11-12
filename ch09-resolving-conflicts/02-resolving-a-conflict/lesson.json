@@ -1,0 +1,9 @@
+{
+  "title": "Resolving a Conflict",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Resolve a heading conflict, stage the file, finish the merge, and print the result and a clean status.",
+  "prerequisites": ["Reading a Conflict"],
+  "resetOnCheck": true,
+  "hint": "Set up the two conflicting headings and run the merge with *> $null. Then Set-Content for # Notes from both, git add README.md, and git commit -q -m \"Resolve heading conflict\". Then Get-Content, and an if line with -not (git status --short) that prints Status: clean."
+}
