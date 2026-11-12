@@ -31,6 +31,15 @@ const { syntaxCommand, parseDiagnostics, outputMatches, compareFiles } = require
 const { PRACTICE_FOLDER, resetFolder, snapshotFolder } = require('./core/practice');
 const { gitEnvironment } = require('./core/git-env');
 
+// The environment for a Git run. The ignore file for the practice repository is written to the app's data folder, so it
+// can be used by every run without touching the learner's own settings.
+function gitEnv() {
+  const file = path.join(app.getPath('userData'), 'practice-excludes');
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, 'shared.git/\nclone/\n', 'utf8');
+  return gitEnvironment(process.env, file);
+}
+
 // Only text files are opened from the output, so a file the learner made can't start a program by being clicked.
 const OPENABLE_EXTENSIONS = new Set(['.txt', '.md', '.csv', '.json', '.xml', '.ps1', '.log', '.yaml', '.yml']);
 
@@ -253,7 +262,7 @@ async function startRun(sender, lessonId, language, code) {
   const send = (payload) => {
     if (!sender.isDestroyed()) sender.send('run:event', payload);
   };
-  const child = spawn(command, args, { cwd: dir, windowsHide: true, shell: false, env: gitEnvironment() });
+  const child = spawn(command, args, { cwd: dir, windowsHide: true, shell: false, env: gitEnv() });
   activeRun = child;
   child.stdin.end();
 
@@ -290,7 +299,7 @@ function writeSource(lessonId, language, code) {
 // Runs a command to the end and keeps what it printed. Check needs the output, so this doesn't stream it.
 function runToEnd(command, args, cwd, timeoutMs) {
   return new Promise((resolve) => {
-    const child = spawn(command, args, { cwd, windowsHide: true, shell: false, env: gitEnvironment() });
+    const child = spawn(command, args, { cwd, windowsHide: true, shell: false, env: gitEnv() });
     child.stdin.end();
     let stdout = '';
     let stderr = '';

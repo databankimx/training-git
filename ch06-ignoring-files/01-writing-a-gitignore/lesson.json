@@ -1,0 +1,9 @@
+{
+  "title": "Writing a .gitignore",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Write a .gitignore that hides log files, then print the short status with the log file hidden.",
+  "prerequisites": ["Summary: Undoing Safely"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main. Then Set-Content for .gitignore with *.log, and Set-Content for app.log and README.md. Then Write-Output with (git status --short). The log file should not be listed."
+}

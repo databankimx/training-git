@@ -1,0 +1,9 @@
+{
+  "title": "Cloning a Repository",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Push a repository to a shared bare copy, clone it into a second folder, and print the clone's history.",
+  "prerequisites": ["Naming a Remote and Pushing"],
+  "resetOnCheck": true,
+  "hint": "Commit the README, make the bare shared.git, add origin, and push with -u. Then git clone -q with the full path to shared.git and the full path to the clone folder. Then Write-Output with (git -C and the clone folder, then log --format=%s)."
+}

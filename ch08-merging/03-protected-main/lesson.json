@@ -1,0 +1,9 @@
+{
+  "title": "Protected Main",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Commit on a notes branch, then check that the current branch is ready to propose.",
+  "prerequisites": ["A Merge Commit"],
+  "resetOnCheck": true,
+  "hint": "Commit the README on main, then git switch -c notes, Add-Content, git add, and git commit -q -m \"Add second section\". Then an if line testing (git branch --show-current) -eq \"main\", printing Work on a branch first in the if block, and Ready for a pull request: with the branch in the else block."
+}

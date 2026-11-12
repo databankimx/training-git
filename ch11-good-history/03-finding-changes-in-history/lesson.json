@@ -1,0 +1,9 @@
+{
+  "title": "Finding Changes in History",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Make three commits, then print the history of one file and the commit that added a phrase.",
+  "prerequisites": ["Making Small Commits"],
+  "resetOnCheck": true,
+  "hint": "Commit README and LICENSE as before, then Add-Content for Third section, git add, git commit -q -m \"Add third section\". Then Write-Output (git log --format=%s -- README.md), and Write-Output (git log --format=%s -S \"Third section\")."
+}

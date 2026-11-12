@@ -1,0 +1,9 @@
+{
+  "title": "Staging a File",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Create a README in the practice repository, stage it, and print the short status.",
+  "prerequisites": ["Summary: Your First Repository"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main, then Set-Content for README.md with # Practice notes. Then git add README.md, and Write-Output with (git status --short). The result has two spaces after the A."
+}

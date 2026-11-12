@@ -1,0 +1,9 @@
+{
+  "title": "Reading the Status",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Add a Markdown file to the practice repository, and print its short status.",
+  "prerequisites": ["Making a Repository"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, then git init -q -b main, then Set-Content for README.md with # Practice notes. Then Write-Output with (git status --short) in parentheses. The result should be ?? README.md."
+}

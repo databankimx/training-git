@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Resolving Conflicts",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Create a conflict, print its status mark, resolve it, and print the subject of the merge commit.",
+  "prerequisites": ["Aborting a Merge"],
+  "resetOnCheck": true,
+  "hint": "Set up the two conflicting headings and git merge --no-edit notes *> $null. Write-Output (git status --short) shows UU. Then set the README to # Notes from both, git add, git commit -q -m \"Resolve heading conflict\". Then Write-Output Merged: with $(git log -1 --format=%s)."
+}

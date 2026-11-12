@@ -12,9 +12,11 @@ const PRACTICE_IDENTITY = {
   email: 'practice@example.invalid',
 };
 
-// The settings a Git lesson needs, added to the environment the process already has.
-function gitEnvironment(base = process.env) {
-  return {
+// The settings a Git lesson needs, added to the environment the process already has. The optional excludesFile is a file
+// of patterns Git ignores in the practice repository. It holds the tutorial's own remote and clone folders, so they don't
+// show as untracked work.
+function gitEnvironment(base = process.env, excludesFile = null) {
+  const env = {
     ...base,
     GIT_AUTHOR_NAME: PRACTICE_IDENTITY.name,
     GIT_AUTHOR_EMAIL: PRACTICE_IDENTITY.email,
@@ -29,6 +31,12 @@ function gitEnvironment(base = process.env) {
     GIT_CONFIG_KEY_0: 'color.ui',
     GIT_CONFIG_VALUE_0: 'never',
   };
+  if (excludesFile) {
+    env.GIT_CONFIG_COUNT = '2';
+    env.GIT_CONFIG_KEY_1 = 'core.excludesFile';
+    env.GIT_CONFIG_VALUE_1 = excludesFile;
+  }
+  return env;
 }
 
 module.exports = { PRACTICE_IDENTITY, gitEnvironment };

@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+# Notes from main
+=======
+# Notes from the branch
+>>>>>>> notes

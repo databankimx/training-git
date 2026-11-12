@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Working Together",
+  "runtime": "powershell",
+  "minutes": 25,
+  "objective": "Count the commits a shared copy holds that you lack, pull them in, count again, and print a clean status.",
+  "prerequisites": ["Reading a Change as a Reviewer"],
+  "resetOnCheck": true,
+  "hint": "Set up the shared copy and the clone, and have the clone push Add teammate note. Back in the original: git fetch -q origin, then Write-Output Behind: with $(git rev-list --count HEAD..origin/main). Then git pull -q --ff-only origin main, the same count with Behind after pull:, and the if line that prints Status: clean."
+}

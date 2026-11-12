@@ -1,0 +1,9 @@
+{
+  "title": "Unstaging a Change",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Stage an edit, move it back out of the staging area, and print the short status.",
+  "prerequisites": ["Discarding an Edit"],
+  "resetOnCheck": true,
+  "hint": "Commit the README as before. Add-Content for Second section, git add README.md, then git restore --staged README.md with the --staged switch. Then Write-Output with (git status --short). The result starts with a space."
+}

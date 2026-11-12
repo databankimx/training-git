@@ -1,0 +1,9 @@
+{
+  "title": "Checking Before You Start",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Set up a shared copy, pull with --ff-only, and print a message when the folder is clean.",
+  "prerequisites": ["Summary: Good History"],
+  "resetOnCheck": true,
+  "hint": "Commit the README on main, make shared.git, add origin, and push -u. Then git pull -q --ff-only origin main. Then an if line with -not (git status --short) that prints Ready to start."
+}

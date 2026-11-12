@@ -1,0 +1,9 @@
+{
+  "title": "Making a Repository",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Make a repository in the practice folder, and print whether its .git folder is there.",
+  "prerequisites": ["Summary: Setting Up Git"],
+  "resetOnCheck": true,
+  "hint": "Set-Location to C:\\Development\\git-practice, then git init -q -b main. Then Write-Output with Repository ready: and $(Test-Path \".git\") inside double quotes."
+}

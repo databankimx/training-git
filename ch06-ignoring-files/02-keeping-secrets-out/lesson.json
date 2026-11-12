@@ -1,0 +1,9 @@
+{
+  "title": "Keeping Secrets Out",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Write a rule for a secret file, create the file, and check that the rule matches it.",
+  "prerequisites": ["Writing a .gitignore"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main. Set-Content for .gitignore with secrets.txt, then Set-Content for secrets.txt. Then Write-Output with (git check-ignore secrets.txt) in parentheses."
+}

@@ -1,0 +1,9 @@
+{
+  "title": "A Fast-Forward Merge",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Commit on a notes branch, switch to main, merge notes, and print the history of main.",
+  "prerequisites": ["Summary: Branches"],
+  "resetOnCheck": true,
+  "hint": "Make the first commit on main, then git switch -c notes, Add-Content for Second section, git add, git commit -q -m \"Add second section\". Then git switch main, git merge -q notes, and Write-Output with (git log --format=%s)."
+}

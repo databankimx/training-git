@@ -102,7 +102,7 @@ Each chapter has a short introduction, a few steps, and a summary with three qui
 
 **Chapter 7. Branches.** Creating and switching branches, what a branch is, and committing on one. Exercise: create a branch, commit, and print the current branch.
 
-**Chapter 8. Merging.** Fast-forward and merge commits, `git merge`, and keeping a branch small. Exercise: merge a finished branch into main, and print the log.
+**Chapter 8. Merging.** Fast-forward and merge commits, `git merge`, and the team's protected main. Protected main is taught as a rule of the hosting service, not of Git: changes reach `main` by pull request, and a codeowner reviews them. The chapter says so, and it checks only the step a learner controls locally, which is working on a branch before a change is proposed. Four steps, the last a summary.
 
 **Chapter 9. Resolving conflicts.** Why conflicts happen, the conflict markers, choosing the text, `git add` after resolving, and `git merge --abort`. Exercise: resolve a conflict in a Markdown file, and check the file's final text.
 
@@ -138,7 +138,7 @@ The setup script doesn't ask for any account or credential, and it doesn't creat
 3. **Chapters 0 to 4.** Introduction through seeing changes, with exercises and quizzes, tested on a clean machine.
 4. **Chapters 5 to 9.** Undoing through conflicts.
 5. **Chapters 10 to 13 and the appendix.** Sharing through the capstone, including the optional hosted-remote section.
-6. **Setup and quickstart.** `setup.ps1`, `README.md`, and `QUICKSTART.md`, tested on a clean machine with nothing else installed.
+6. **Setup and quickstart.** Written: `setup.ps1`, `README.md`, and `QUICKSTART.md`. The setup script still needs a run on a clean machine with nothing else installed.
 7. **Publish.** Repository content reviewed, `resources/` ignored, and pushed to GitHub.
 
 Each milestone is tested before the next begins.
@@ -160,6 +160,12 @@ Settled during the design:
 
 9. **Output without hashes.** Expected output never includes commit hashes, so the checks repeat on every machine.
 10. **Git's colors off.** The reader turns off Git's colors, so the expected output holds everywhere.
+11. **Protected main.** On the team, `main` is protected. Changes reach it only by pull request, reviewed by a codeowner. Git has no pull requests, protected branches, or codeowners. Those are features of the hosting service, so Chapter 8 teaches the rule as a team practice, and Chapter 12 describes review in general terms, naming pull requests as the common word without describing any service's screens.
+
+12. **The tutorial's own folders are ignored in reader runs.** Testing showed that the bare `shared.git` folder and the `clone` folder appeared as untracked files in `git status`, so a status check on a clean repository failed. The reader now writes an ignore file, listing those two folders, and passes it to Git on every run, through `core.excludesFile`. The setting applies only to the reader's runs, and the local-remote section of Chapter 10 says so.
+13. **Reset per step.** Every Git step sets `resetOnCheck` in its `lesson.json`, so Check always starts with no repository, even where the step has no files expectation. Run keeps the repository. The reader's PowerShell rules are unchanged, because the flag defaults to off.
+14. **Capstone shape.** Chapter 13 tells one story, Alice and Bob editing one status line on separate branches, with a conflict and a resolution whose reason is written in the commit body. It uses local branches, so every step can be checked. The chapter describes the team's clone and pull request process in words, and the summary checks the resolved document and the first-parent history.
+15. **Setup script.** `setup.ps1` is the PowerShell tutorial's script, with this tutorial's repository address and folder. It installs Git, PowerShell 7, Node.js, and the Build Tools fallback, and it doesn't touch global Git settings.
 
 ---
 

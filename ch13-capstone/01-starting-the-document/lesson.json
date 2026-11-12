@@ -1,0 +1,9 @@
+{
+  "title": "Starting the Document",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Create the project notes document with two lines, commit it, and print the history.",
+  "prerequisites": ["Summary: Working Together"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main, then Set-Content for DOCUMENT.md with @(\"# Project notes\", \"Status: draft\") as the value. Then git add, git commit -q -m \"Start project notes\", and Write-Output with (git log --format=%s)."
+}

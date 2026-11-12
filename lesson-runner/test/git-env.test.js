@@ -39,6 +39,14 @@ test('every run turns Git colours off through the config environment', () => {
   assert.equal(env.GIT_CONFIG_VALUE_0, 'never');
 });
 
+test('the tutorial folders are ignored when an ignore file is given, so they never show as work', () => {
+  const env = gitEnvironment({}, 'C:\\Users\\x\\practice-excludes');
+  assert.equal(env.GIT_CONFIG_COUNT, '2');
+  assert.equal(env.GIT_CONFIG_KEY_1, 'core.excludesFile');
+  assert.equal(env.GIT_CONFIG_VALUE_1, 'C:\\Users\\x\\practice-excludes');
+  assert.equal(env.GIT_CONFIG_KEY_0, 'color.ui');
+});
+
 test('the existing environment, including PATH, is kept', () => {
   const env = gitEnvironment({ PATH: 'C:\\Program Files\\Git\\cmd', KEEP: 'yes' });
   assert.equal(env.PATH, 'C:\\Program Files\\Git\\cmd');

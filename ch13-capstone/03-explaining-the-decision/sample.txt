@@ -1,0 +1,4 @@
+Combine status updates from Alice and Bob
+Update status from Alice
+Start project notes
+Why: Bob approved the draft, and Alice's review is still open, so the status records both.

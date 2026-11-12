@@ -1,0 +1,9 @@
+{
+  "title": "Committing",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Stage a README, commit it with a message, and print the subject from the log.",
+  "prerequisites": ["Staging a File"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main, Set-Content for README.md, then git add README.md. Then git commit -q -m \"Add practice notes\". Then Write-Output with (git log --format=%s)."
+}

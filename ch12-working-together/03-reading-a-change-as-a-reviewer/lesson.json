@@ -1,0 +1,9 @@
+{
+  "title": "Reading a Change as a Reviewer",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Make a change on a notes branch, then print the commits it adds to main and the size of the change.",
+  "prerequisites": ["Pulling Before You Push"],
+  "resetOnCheck": true,
+  "hint": "Commit the README on main, git switch -c notes, Add-Content for Review note, git add, git commit -q -m \"Add review note\". Then Write-Output (git log main..notes --format=%s), and Write-Output (git diff --stat main notes)."
+}

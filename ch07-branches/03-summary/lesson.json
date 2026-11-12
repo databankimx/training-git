@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Branches",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Commit on a notes branch, switch back to main, and print the current branch and the history of main.",
+  "prerequisites": ["Committing on a Branch"],
+  "resetOnCheck": true,
+  "hint": "Make the first commit on main, then git switch -c notes, the second commit as before, then git switch main. Then Write-Output Current: with $(git branch --show-current), and Write-Output (git log --format=%s)."
+}

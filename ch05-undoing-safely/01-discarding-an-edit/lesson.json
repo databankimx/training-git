@@ -1,0 +1,9 @@
+{
+  "title": "Discarding an Edit",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Commit a README, add a mistaken line, restore the file, and print what it says now.",
+  "prerequisites": ["Summary: Seeing Changes"],
+  "resetOnCheck": true,
+  "hint": "Commit the README as before. Add-Content for A line by mistake. Then git restore README.md. Then Get-Content for the file's path. The output is the original heading."
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Creating a Branch",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Commit a README on main, create a notes branch, and print the current branch.",
+  "prerequisites": ["Summary: Ignoring Files"],
+  "resetOnCheck": true,
+  "hint": "Set-Location, git init -q -b main, Set-Content for README.md, git add, and git commit -q -m \"Add practice notes\". Then git switch -c notes, and Write-Output with (git branch --show-current)."
+}
