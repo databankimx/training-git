@@ -1,4 +1,4 @@
-# 13. Capstone
+# 14. Capstone
 
 This is where the tutorial comes together. You'll follow one small shared document from its first version to a resolved, explained history, using nearly everything from the chapters before it: snapshots, status, diffs, branches, merges, conflicts, commit messages, and history filters.
 

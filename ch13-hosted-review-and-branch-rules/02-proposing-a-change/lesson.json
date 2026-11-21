@@ -1,0 +1,9 @@
+{
+  "title": "Proposing a Change",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Commit a change on a feature branch, then print the commits the branch adds to main.",
+  "prerequisites": ["Branches and the Rule on Main"],
+  "resetOnCheck": true,
+  "hint": "Repeat the setup from the previous step, then Write-Output (git log main..feature/hosted-review --format=%s). It should print only Add hosted review note."
+}

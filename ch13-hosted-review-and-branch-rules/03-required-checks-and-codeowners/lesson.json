@@ -1,0 +1,9 @@
+{
+  "title": "Required Checks and Codeowners",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Add a CODEOWNERS file in .github, commit it, and print the commit subject and the file.",
+  "prerequisites": ["Proposing a Change"],
+  "resetOnCheck": true,
+  "hint": "Commit the README on main, then New-Item -ItemType Directory -Force for the .github folder. Set-Content the CODEOWNERS file with * @example-owner, git add, git commit -q -m Add codeowners file. Then Write-Output (git log -1 --format=%s) and Get-Content on the CODEOWNERS file."
+}

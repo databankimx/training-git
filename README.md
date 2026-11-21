@@ -1,5 +1,30 @@
 # Git Basics
 
+## License and Support
+
+This repository is provided under the [MIT License](LICENSE). You are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell the materials in this repository, subject to the terms of that license.
+
+This repository is provided for training and reference purposes only. DataBank IMX does not provide warranties, guarantees, maintenance, troubleshooting, implementation assistance, or technical support for this code or its use. Use it in any way permitted by the MIT License, but you are responsible for evaluating, adapting, testing, and supporting any use of it in your own environment.
+
+## DataBank Responsibilities for Custom Code
+
+All DataBank employees - including those working with AI-assisted tools - are bound by the [Development Rules of Engagement](development-rules-of-engagement.md). That document defines the rules for quoting, approving, developing, reviewing, scanning, storing, and delivering custom code for client work.
+
+Key obligations that apply to everyone on every custom code engagement:
+
+- **You own the code you deliver.** This applies equally to hand-written code, AI-assisted code, and AI-generated code. "The AI wrote it" is not an acceptable explanation for a production issue, a failed review, a security finding, or a support problem.
+- **Code must be reviewed before delivery.** Review is interactive and must confirm that the code works, meets DataBank standards, is maintainable, and that the developer understands it well enough to explain, debug, and maintain it. Polished or well-formatted output - including AI-generated output - is not evidence of correctness.
+- **Code must be in source control before delivery.** All custom code must be committed to the appropriate DataBank GitHub Enterprise repository before it is delivered to a client, regardless of whether the client receives source code, compiled binaries, or deployed functionality.
+- **CI scanning must pass before delivery.** Required checks are the standards policy scan, SonarQube, and Snyk. A passing local build is not a substitute.
+- **All third-party dependencies must be license-vetted.** The license must permit closed-source commercial use. Copyleft or unclear licensing must be escalated before use. Dependencies must not be added simply because an AI tool suggested them.
+- **Only approved AI tools may be used.** Use only IT-approved tools through company accounts. All data entered into AI systems is subject to the [DataBank AI Acceptable Use Policy](https://workforcenow.adp.com/mascsr/wfncontenttools/file-management/file/JTJGc3RhdGljJTJGY2xpZW50cyUyRmNvbnRlbnQlMkZBSStBY2NlcHRhYmxlK1VzZStQb2xpY3kucGRmJTNGMTc3MTM0NzA4NjE4MQ==) and must be treated as confidential by default.
+- **Custom code is billable work.** Code must be tied to an approved quote or engagement before commitment or delivery. Development quotes require approval from the Development Director or delegated development leadership before being sent externally.
+- **Exceptions require explicit approval.** Time pressure alone is not a reason to bypass quote approval, source control, review, or CI scanning.
+
+See the [Development Rules of Engagement](development-rules-of-engagement.md) for the full policy, including billing and quoting rules, source-code delivery rules, the delivery readiness checklist, and the exception process.
+
+---
+
 Git keeps a history of your work, so every change has a record of what it did and why. This tutorial teaches Git from the first snapshot to sharing work with other people, and to reading a shared history with confidence. It also covers the habits that keep a team's work trustworthy: checking before you start, pulling before you push, and reading a change the way a reviewer would.
 
 ## Quick start
@@ -20,7 +45,7 @@ The script installs what's missing, including Git, PowerShell 7, and Node.js, an
 - Git, PowerShell 7, and Node.js 24 or later. The setup script installs any that are missing.
 - The Visual Studio Build Tools with the C++ workload, the fallback if Electron's download fails. The setup script installs them if they're missing. They need an Administrator PowerShell.
 
-No prior experience with Git or a terminal is assumed. The Markdown and PowerShell tutorials are recommended reading, because the examples edit Markdown files and are typed in PowerShell.
+No prior experience with Git or a terminal is assumed. The Markdown tutorial is recommended reading, because the examples edit Markdown files. The introduction covers every PowerShell form the exercises use, so the PowerShell tutorial is optional.
 
 ## The chapters
 
@@ -39,10 +64,11 @@ Work through them in order. Each chapter has a short introduction, a few steps, 
 10. **Remotes and sharing.** Pushing to a shared copy, cloning, fetching, and pulling. The chapter ends with an optional section on a hosted remote, which has no exercise.
 11. **Good history.** Messages with a body, small commits, and finding changes later.
 12. **Working together.** Checking before you start, pulling before you push, and reading a change as a reviewer.
-13. **Capstone.** Two people, one document, one conflict, and a history that explains the decision.
-14. **Appendix.** A cheat sheet, a glossary, and what to do when Git won't behave.
+13. **Hosted review and branch rules (optional).** The rules a hosting service adds on top of Git: protected branches, proposed changes, required checks, and codeowners. Your organization's rules are its own.
+14. **Capstone.** Two people, one document, one conflict, and a history that explains the decision.
+15. **Appendix.** A cheat sheet, a glossary, and what to do when Git won't behave.
 
-Git itself has no pull requests, protected branches, or codeowners. Those are features of hosting services, and the lessons describe them in general terms. Chapter 8 explains how the team protects `main`.
+Git itself has no pull requests, protected branches, or codeowners. Those are features of hosting services. Chapter 8 explains how the team protects `main`, and Chapter 13 describes the hosted rules in general terms.
 
 ## The reader
 
@@ -82,8 +108,8 @@ These are good habits in any document, not only in this tutorial.
 
 - `setup.ps1` prepares the reader and checks the tools it needs.
 - `QUICKSTART.md` explains setup and the reader.
-- `ch00-introduction\` through `ch13-capstone\` hold the chapters. Each chapter has a `lesson.md`, and its steps are folders with a `lesson.json`, a `lesson.md`, and, for exercises, a `starter.ps1`, a `sample.txt` with the expected output, and a `solution.ps1`.
-- `ch14-appendix\` holds the appendix.
+- `ch00-introduction\` through `ch14-capstone\` hold the chapters. Each chapter has a `lesson.md`, and its steps are folders with a `lesson.json`, a `lesson.md`, and, for exercises, a `starter.ps1`, a `sample.txt` with the expected output, and a `solution.ps1`.
+- `ch15-appendix\` holds the appendix.
 - `lesson-runner\` is the reader: a desktop window built with Electron.
 - `resources\` holds the design notes for this tutorial, and it isn't published.
 
