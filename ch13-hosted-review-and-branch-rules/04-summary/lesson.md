@@ -12,6 +12,36 @@ A hosting service can protect `main`, require a review, require passing checks, 
 - Some organizations allow only administrators to create repositories. Ask before you assume you can.
 - Your organization's rules are its own. Follow them, and ask your team which ones apply before you push.
 
+## Worked example
+
+This example creates a branch, commits on it, then prints the branch name and the commits it adds. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c hotfix-typo
+Add-Content -Path "draft.txt" -Value "Typo fixed"
+git add draft.txt
+git commit -q -m "Fix typo in draft"
+Write-Output (git branch --show-current)
+Write-Output (git log main..hotfix-typo --format=%s)
+~~~
+
+~~~text
+Output:
+
+hotfix-typo
+Fix typo in draft
+~~~
+
+This is the exercise's pattern in a different setting: branch, commit, then check the branch and its commits before you propose anything.
+
 ## Try it
 
 This exercise puts the chapter together, using only commands you have already seen. Your script must:

@@ -19,6 +19,32 @@ A codeowners file lives in `.github`, and it's named `CODEOWNERS`. Each line giv
 
 The first line sets a default for the whole repository. The second names a different owner for the files in `.github/workflows`. When more than one line matches a file, the last matching line wins, so put the specific rules below the general ones. Your organization's file names its own owners, and you should ask your team who they are.
 
+## Worked example
+
+This example writes a codeowners file that names an owner for the `docs` folder, then prints the file. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+New-Item -ItemType Directory -Force -Path ".github" | Out-Null
+Set-Content -Path ".github\CODEOWNERS" -Value "docs/ @example-writers"
+Get-Content ".github\CODEOWNERS"
+~~~
+
+~~~text
+Output:
+
+docs/ @example-writers
+~~~
+
+A codeowners line gives a path and its owners. Changes to files under `docs/` need a review from `@example-writers`. The owner names here are placeholders, and your team's file names its own owners.
+
 ## Try it
 
 This exercise adds a codeowners file to the practice repository, commits it, and prints the commit subject and the file. The names in the file are placeholders. Your script must:

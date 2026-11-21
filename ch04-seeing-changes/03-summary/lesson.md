@@ -13,6 +13,32 @@ You can compare the working folder with the last snapshot, and the staging area 
 - Staging a change moves it from the unstaged comparison to the staged one.
 - An empty diff means nothing differs in that comparison, not that the work is gone.
 
+## Worked example
+
+This example shows the size of a change, which is the summary a reviewer reads first. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Add-Content -Path "draft.txt" -Value "More text"
+Write-Output (git diff --stat)
+~~~
+
+~~~text
+Output:
+
+ draft.txt | 1 +
+ 1 file changed, 1 insertion(+)
+~~~
+
+`--stat` gives one line per file with the number of changed lines, then a total. The `+` marks added lines.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

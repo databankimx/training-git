@@ -13,6 +13,37 @@ You can write a message with a subject and a body, keep each commit to one chang
 - `git blame` shows who last changed each line, and the commit that did it. Its output changes between machines, so read it, and then check the commit with `git show`.
 - A formatting commit can make blame point at the wrong change, so check the commit before you trust the name.
 
+## Worked example
+
+This example lists only the commits that touched a file, after several commits to different files. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Set-Content -Path "notes.txt" -Value "Meeting notes"
+git add notes.txt
+git commit -q -m "Add meeting notes"
+Add-Content -Path "draft.txt" -Value "Second line"
+git add draft.txt
+git commit -q -m "Add second line to draft"
+Write-Output (git log --format=%s -- draft.txt)
+~~~
+
+~~~text
+Output:
+
+Add second line to draft
+Add draft
+~~~
+
+The log for one path shows only the commits that changed it. Use this when you want the history of a single file.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

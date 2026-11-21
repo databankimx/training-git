@@ -45,6 +45,33 @@ That makes it the first undo to reach for when a staging choice was wrong. Disca
 > **Aside: the first column and the second.**
 > The short status has two columns, one for the staging area and one for the working folder. `M ` means staged and unchanged since. ` M` means unstaged and changed. `MM` means changed, staged, and changed again. Reading the columns separately tells you where the change is, which is more useful than remembering each combined mark.
 
+## Worked example
+
+This example stages an edit, then unstages it. The edit stays in the file. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Add-Content -Path "draft.txt" -Value "Staged line"
+git add draft.txt
+git restore --staged draft.txt
+Write-Output (git status --short)
+~~~
+
+~~~text
+Output:
+
+ M draft.txt
+~~~
+
+`git restore --staged` removes the change from the staging area, but keeps the edit in your file. ` M` means modified in the folder but not staged.
+
 ## Try it
 
 This exercise commits a README, stages an edit, unstages it, and prints the short status. The check compares the line.

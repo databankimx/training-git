@@ -15,6 +15,39 @@ You've followed one shared document from its first version to a resolved, explai
 
 On a team, each person would work in a clone, push a branch, and propose it as a pull request, which a codeowner reviews before the change reaches `main`. The reviewer would read the diff and the messages you've just learned to write, and the history would show the reviewed decision. That is the team's process, and the habits underneath it are the ones in this tutorial.
 
+## Worked example
+
+This example counts the commits on main's own line after a merge, which is one way to check the history. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c review-notes
+Set-Content -Path "notes.txt" -Value "Review notes"
+git add notes.txt
+git commit -q -m "Add review notes"
+git switch -q main
+Set-Content -Path "other.txt" -Value "Other work"
+git add other.txt
+git commit -q -m "Add other work"
+git merge -q --no-edit review-notes
+Write-Output (git rev-list --count --first-parent HEAD)
+~~~
+
+~~~text
+Output:
+
+3
+~~~
+
+The count covers the commits on main's own line: the first draft, the other work, and the merge. The branch's commit is not counted, because it came in through the merge.
+
 ## Try it
 
 This exercise repeats the whole story and checks the result. Your script must:

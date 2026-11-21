@@ -26,6 +26,34 @@ The file has two lines, a heading and a status. Everything that follows is a cha
 > **Aside: the file everyone edits.**
 > A document that many people edit is where conflicts come from, and the usual cure is to keep each part of it small. A short document with a clear structure, one idea per section, produces smaller and clearer conflicts than a long document where everyone writes into the same paragraph.
 
+## Worked example
+
+This example creates a shared document and commits it with a message that says what the document is for. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Set-Content -Path "status.md" -Value "# Team status"
+git add status.md
+git commit -q -m "Start status document"
+Write-Output (git log --format=%s)
+~~~
+
+~~~text
+Output:
+
+Start status document
+Add draft
+~~~
+
+A commit message says what the document is for, so the history tells the story of its edits later. The newest commit appears first.
+
 ## Try it
 
 This exercise creates the document, commits it with a subject, and prints the history. The check compares the line.

@@ -20,6 +20,34 @@ The list shows only the commits the branch adds, so `main`'s own history stays o
 
 On GitHub, the proposed change is a pull request. It shows the same commits, lets reviewers comment on specific lines, and records who approved it. The screens depend on the host, and your team's rules decide what a proposal needs before it can merge. The Git part is the same everywhere: a branch with commits that the reviewer can read.
 
+## Worked example
+
+This example commits a typo fix on a branch, then lists the commits it adds to main before proposing it. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c hotfix-typo
+Add-Content -Path "draft.txt" -Value "Typo fixed"
+git add draft.txt
+git commit -q -m "Fix typo in draft"
+Write-Output (git log main..hotfix-typo --format=%s)
+~~~
+
+~~~text
+Output:
+
+Fix typo in draft
+~~~
+
+Check the list before you propose the change, the way a reviewer would. A proposed change on GitHub, a pull request, shows these same commits. The screens differ by host.
+
 ## Try it
 
 This exercise makes a change on a branch, then prints the commits the branch adds. Your script must:

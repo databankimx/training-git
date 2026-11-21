@@ -13,6 +13,30 @@ You can make a repository, confirm that its `.git` folder is there, and read its
 - `A `, ` M`, and `AM` mark files that are staged, modified, or both. The next chapters cover them.
 - Running `git init` in an existing repository is harmless.
 
+## Worked example
+
+This example creates two files and prints their status, so you can see several lines at once. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "a.txt" -Value "A"
+Set-Content -Path "b.txt" -Value "B"
+Write-Output (git status --short)
+~~~
+
+~~~text
+Output:
+
+?? a.txt
+?? b.txt
+~~~
+
+Git lists each untracked file on its own line, in alphabetical order. The status shows the state of your folder, and nothing is committed yet.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

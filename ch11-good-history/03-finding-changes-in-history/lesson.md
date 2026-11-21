@@ -50,6 +50,36 @@ Each line starts with a short hash, then the author, the date, and the line numb
 > **Aside: the blame that blames the formatter.**
 > A reformatting commit can make every line look as though it was changed last week, because the whole file was rewritten. When blame points at a formatting change, look at the commit before it, or ask blame to ignore whitespace. The answer is hidden under the noise, so check the commit before you trust the name.
 
+## Worked example
+
+This example lists the commits that changed one file, which is a quick way to find when a file was edited. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Set-Content -Path "notes.txt" -Value "Meeting notes"
+git add notes.txt
+git commit -q -m "Add meeting notes"
+Add-Content -Path "draft.txt" -Value "Second line"
+git add draft.txt
+git commit -q -m "Add second line to draft"
+Write-Output (git log --format=%s -- notes.txt)
+~~~
+
+~~~text
+Output:
+
+Add meeting notes
+~~~
+
+Putting `--` before a path limits the log to commits that changed that file. The commit that changed only `draft.txt` is left out.
+
 ## Try it
 
 This exercise makes three commits, then finds the history of the README and the commit that added the third section. The check compares the three lines.

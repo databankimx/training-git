@@ -39,6 +39,29 @@ That's why the response to a committed secret is not a quick delete. Tell the pe
 > **Aside: a secret in a file with an ordinary name.**
 > Secrets don't always live in files with obvious names. A settings file called `config.json` can hold a password, and so can a script. Read a file before you commit it, rather than trusting its name, and keep secrets out of files altogether where you can, for example by reading them from the environment.
 
+## Worked example
+
+This example asks Git whether a file would be ignored, using a key file as the example. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path ".gitignore" -Value "*.key"
+Set-Content -Path "server.key" -Value "not a real key"
+Write-Output (git check-ignore server.key)
+~~~
+
+~~~text
+Output:
+
+server.key
+~~~
+
+`git check-ignore` prints the file name when a pattern ignores it, and prints nothing when it doesn't. Check this before committing anything that holds a secret.
+
 ## Try it
 
 This exercise writes a rule for a secret file, creates the file, and checks that the rule matches it. The check compares the line.

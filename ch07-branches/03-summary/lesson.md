@@ -13,6 +13,32 @@ You can create a branch, switch between branches, commit on one without changing
 - A detached HEAD means you're on a commit rather than a branch, so new commits can be lost. Switch to a branch first.
 - Short, descriptive branch names, in lowercase with hyphens, are the easiest to read.
 
+## Worked example
+
+This example creates a branch, switches back to main, and prints the branch name. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -c feature-search
+git switch main
+Write-Output (git branch --show-current)
+~~~
+
+~~~text
+Output:
+
+main
+~~~
+
+`git switch` with just a name moves you to an existing branch. Your files change to match that branch's last commit.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

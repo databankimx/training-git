@@ -58,6 +58,42 @@ An empty status means the merge is complete and the folder is clean. The history
 > **Aside: the check that says you're still merging.**
 > If you run `git status` without `--short` during a conflict, it says that you are in the middle of a merge, and lists the files still to resolve. The long form is useful there, because it tells you what Git is waiting for. When the list is empty, the commit finishes the merge.
 
+## Worked example
+
+This example resolves the conflict from the previous example by writing the text you want, then finishing the merge. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c feature-search
+Set-Content -Path "draft.txt" -Value "Search version"
+git add draft.txt
+git commit -q -m "Change draft on the branch"
+git switch -q main
+Set-Content -Path "draft.txt" -Value "Main version"
+git add draft.txt
+git commit -q -m "Change draft on main"
+git merge -q feature-search
+Set-Content -Path "draft.txt" -Value "Combined version"
+git add draft.txt
+git commit -q --no-edit
+Get-Content draft.txt
+~~~
+
+~~~text
+Output:
+
+Combined version
+~~~
+
+Resolving means writing the text you want, removing the markers, and staging the file with `git add`. `git commit --no-edit` then finishes the merge with Git's default message.
+
 ## Try it
 
 This exercise sets up the same two conflicting branches, resolves the file, stages it, commits the merge, and prints the result. The check compares both lines.

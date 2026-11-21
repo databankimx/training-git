@@ -28,6 +28,40 @@ Before aborting, decide whether you've done work you want to keep. If you have, 
 > **Aside: abort is not reset.**
 > `git merge --abort` only undoes a merge in progress. It doesn't touch commits that were already made, and it doesn't rewrite history. That's a different job from the reset command, which the undoing chapter warned about. If you're unsure which one applies, stop and read `git status` before you run anything.
 
+## Worked example
+
+This example starts a conflicting merge, then cancels it, and prints the file to show it went back to main's version. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c feature-search
+Set-Content -Path "draft.txt" -Value "Search version"
+git add draft.txt
+git commit -q -m "Change draft on the branch"
+git switch -q main
+Set-Content -Path "draft.txt" -Value "Main version"
+git add draft.txt
+git commit -q -m "Change draft on main"
+git merge feature-search
+git merge --abort
+Get-Content draft.txt
+~~~
+
+~~~text
+Output:
+
+Main version
+~~~
+
+`git merge --abort` cancels the merge in progress and restores the files to what they were before it started. Use it when you aren't ready to resolve the conflict.
+
 ## Try it
 
 This exercise sets up the conflicting merge, aborts it, and prints the file. The check compares the line, and then a clean status.

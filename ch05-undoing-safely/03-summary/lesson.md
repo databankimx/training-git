@@ -13,6 +13,34 @@ You can move a staged change back out of the staging area, and you can discard a
 - `git reset --hard` discards unsaved work in both places, and it isn't a safe habit.
 - Rewriting history is powerful and affects other people. Reverse a saved commit with a new commit, and ask your team before any rewriting.
 
+## Worked example
+
+This example discards an edit, then prints a clean message only when there is nothing left to commit. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Add-Content -Path "draft.txt" -Value "Unwanted line"
+git restore draft.txt
+if (-not (git status --short)) {
+    Write-Output "Status: clean"
+}
+~~~
+
+~~~text
+Output:
+
+Status: clean
+~~~
+
+`git status --short` prints nothing when the folder matches the last commit. `-not` reverses that, so the `if` line runs its block only when the output is empty.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

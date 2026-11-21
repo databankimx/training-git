@@ -42,6 +42,37 @@ After the summary, the diff shows the lines, as Chapter 4 described. A reviewer 
 > **Aside: the review you did not need to do.**
 > A change to a file you've never read, with a subject you can't interpret, is a reason to ask questions, not a reason to approve. A review is a judgment about the change, and a reviewer who doesn't understand it should say so, rather than assume it is fine.
 
+## Worked example
+
+This example makes a change on a topic branch, then reads it the way a reviewer would. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c topic-docs
+Set-Content -Path "notes.txt" -Value "Review notes"
+git add notes.txt
+git commit -q -m "Add review notes"
+Write-Output (git log main..topic-docs --format=%s)
+Write-Output (git diff --stat main topic-docs)
+~~~
+
+~~~text
+Output:
+
+Add review notes
+ notes.txt | 1 +
+ 1 file changed, 1 insertion(+)
+~~~
+
+The first command lists the commits the branch adds. The second summarizes the size of the change, so the reviewer can compare it with the subject.
+
 ## Try it
 
 This exercise makes a change on a `notes` branch, then reads it the way a reviewer would: the commits it adds, and the size of the change. The check compares the three lines.

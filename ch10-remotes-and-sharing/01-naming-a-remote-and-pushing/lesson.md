@@ -40,6 +40,33 @@ The `-u` switch on the push records `origin/main` as the branch to compare again
 > **Aside: the name that is only a name.**
 > `origin` is a convention, and Git doesn't give it special treatment. You can name a remote anything, and a team usually agrees on one name so everyone's commands match. If a command refers to `origin` and fails, check `git remote` to see what the remote is actually called.
 
+## Worked example
+
+This example creates a bare repository as a shared copy, names it `origin`, and pushes `main` to it. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git init -q --bare shared.git
+git remote add origin shared.git
+git push -q -u origin main
+Write-Output (git remote)
+~~~
+
+~~~text
+Output:
+
+origin
+~~~
+
+A bare repository has no working files, so it works as a shared copy. `git remote add` gives the address a short name, and `-u` makes `main` track it, so later pulls and pushes know where to go.
+
 ## Try it
 
 This exercise makes a bare repository, names it `origin`, pushes `main` to it, and prints the remote's name. The check compares the line.

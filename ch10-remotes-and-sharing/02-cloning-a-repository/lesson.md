@@ -37,6 +37,34 @@ The clone has the same history as the shared repository, because it was copied f
 > **Aside: the folder that was already there.**
 > `git clone` refuses to put a copy in a folder that already holds files. It's a safeguard, and it's the reason a clone should go into an empty folder. If a clone fails with a message about the folder, check what is in it before you delete anything.
 
+## Worked example
+
+This example clones the shared copy into a second folder, then prints the commits the clone has. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git init -q --bare shared.git
+git remote add origin shared.git
+git push -q -u origin main
+git clone -q shared.git copy
+Write-Output (git -C copy log --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add draft
+~~~
+
+`git clone` makes a complete copy of the shared repository in a new folder. `git -C copy` runs the log inside that folder, without moving there first.
+
 ## Try it
 
 This exercise clones the shared repository into a second folder, and prints the copy's history. The check compares the line.

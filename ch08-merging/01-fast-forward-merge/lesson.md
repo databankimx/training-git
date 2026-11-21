@@ -40,6 +40,37 @@ Add practice notes
 > **Aside: the merge you can't see.**
 > A fast-forward looks, in the history, as though the commits were made on `main` all along. Nothing in the log says a branch was involved. When you need to show that work came from a branch, a merge commit does it, which the next step makes.
 
+## Worked example
+
+This example merges a branch that is one commit ahead of main, which Git can do as a fast-forward. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c feature-search
+Add-Content -Path "draft.txt" -Value "Search notes"
+git add draft.txt
+git commit -q -m "Add search notes"
+git switch -q main
+git merge -q feature-search
+Write-Output (git log --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add search notes
+Add draft
+~~~
+
+`main` has no commits of its own, so Git moves it forward to the branch's commit. No new commit is made, and the history stays a straight line.
+
 ## Try it
 
 This exercise makes a `notes` branch with one commit, switches to `main`, merges it, and prints the history. The check compares both lines.

@@ -30,6 +30,38 @@ A single commit that adds the README and the license, and then fixes a typo in a
 > **Aside: the commit that could not be split.**
 > Sometimes a change really is one thing, and it touches many files. That's fine. The test is not the number of files, but whether the subject could describe the whole commit honestly. If it can't, split the change.
 
+## Worked example
+
+This example makes two small commits, one for each change, so each can be read or reverted alone. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Set-Content -Path "notes.txt" -Value "Meeting notes"
+git add notes.txt
+git commit -q -m "Add meeting notes"
+Add-Content -Path "draft.txt" -Value "Second line"
+git add draft.txt
+git commit -q -m "Add second line to draft"
+Write-Output (git log --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add second line to draft
+Add meeting notes
+Add draft
+~~~
+
+Small commits keep each change separate. Each subject names one change, so a reader can see what happened without opening every file.
+
 ## Try it
 
 This exercise writes two files and commits each one separately. It prints the subjects, and then the number of commits. The check compares the three lines.

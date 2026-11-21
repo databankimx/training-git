@@ -58,6 +58,26 @@ The `--global` version is the one people normally want for their own work, and t
 > **Aside: the settings that override.**
 > A local setting beats a global one, so a repository that sets its own identity ignores yours. If a commit shows the wrong name, check the local level first with `git config user.name`, which reads the value Git will actually use.
 
+## Worked example
+
+This example sets a different name in a scratch folder. It also uses `New-Item` to create the folder first. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+Write-Output "Name: $(git config user.name)"
+~~~
+
+~~~text
+Output:
+
+Name: Example Person
+~~~
+
+`git config user.name` sets a value, and reading it back with `$(...)` puts the value inside the line you print. `New-Item` creates the folder, and `| Out-Null` hides its report.
+
 ## Try it
 
 This exercise makes a repository, sets the identity inside it, and prints the name Git will use. The check compares the line.

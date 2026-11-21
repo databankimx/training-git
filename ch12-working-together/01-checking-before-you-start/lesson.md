@@ -40,6 +40,34 @@ Once the pull has run, the latest subject shows what the shared copy holds, and 
 > **Aside: the check that takes two seconds.**
 > These checks are fast, and they're easy to skip when a task feels small. Most of the messy situations in shared repositories start with a small task that was begun on top of something nobody checked. Make the three questions a habit, and the habit does the rest.
 
+## Worked example
+
+This example checks how far a clone is behind its shared copy before you start work. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git init -q --bare shared.git
+git remote add origin shared.git
+git push -q -u origin main
+git clone -q shared.git copy
+Write-Output "Behind: $(git -C copy rev-list --count HEAD..origin/main)"
+~~~
+
+~~~text
+Output:
+
+Behind: 0
+~~~
+
+A count of `0` means the clone has everything the shared copy has. Check this at the start of a session, so you don't build on an old copy.
+
 ## Try it
 
 This exercise sets up a shared copy, runs the checks, and prints a message when the start is clean. The check compares the line.

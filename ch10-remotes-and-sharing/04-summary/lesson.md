@@ -14,6 +14,38 @@ You can name a remote, push to it, clone a copy, and bring a teammate's change i
 - `git pull --ff-only` fetches and then fast-forwards your branch, and stops if the histories have diverged.
 - A refused push means the shared copy has commits you don't have. Fetch, combine, and push again. Never force a push to get past it.
 
+## Worked example
+
+This example pushes a second commit from the original folder, then reads its subject from a clone. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git init -q --bare shared.git
+git remote add origin shared.git
+git push -q -u origin main
+Add-Content -Path "draft.txt" -Value "Second line"
+git add draft.txt
+git commit -q -m "Add second line"
+git push -q
+git clone -q shared.git copy
+Write-Output (git -C copy log -1 --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add second line
+~~~
+
+The push sends the new commit to the shared copy, so a clone made afterwards has it. `git log -1` shows the latest commit in that clone.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

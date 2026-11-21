@@ -57,6 +57,34 @@ The newest commit is first, and the shared commit underneath is the one the bran
 > **Aside: which branch a file is on.**
 > The files in your working folder always match the branch you're on, because switching changes them. A file you can see on `notes` may be absent on `main`. If a file seems to vanish, check the branch first, because nothing has been deleted from the history.
 
+## Worked example
+
+This example commits a change on a branch, then prints the subject of the latest commit. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -c feature-search
+Add-Content -Path "draft.txt" -Value "Search notes"
+git add draft.txt
+git commit -q -m "Add search notes"
+Write-Output (git log -1 --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add search notes
+~~~
+
+The commit goes onto `feature-search`, and `main` doesn't change. `git log -1` shows only the latest commit, and `--format=%s` prints its subject.
+
 ## Try it
 
 This exercise commits a README on `main`, creates `notes`, commits a second section there, and prints the branch and the `main` history. The check compares both lines.

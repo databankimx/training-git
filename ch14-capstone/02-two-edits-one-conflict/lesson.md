@@ -59,6 +59,39 @@ The `UU` means the file is in conflict, and the merge is waiting. The decision a
 > **Aside: the conflict that is a question.**
 > A conflict is Git asking which text the project should have. Two honest edits can disagree, and the resolution is a decision about the work, not a choice of winner. The best resolutions usually keep what both people were trying to say.
 
+## Worked example
+
+This example edits the same file on two branches, merges them, and lists the file that conflicts. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c review-notes
+Set-Content -Path "draft.txt" -Value "Reviewed text"
+git add draft.txt
+git commit -q -m "Review the draft"
+git switch -q main
+Set-Content -Path "draft.txt" -Value "Edited text"
+git add draft.txt
+git commit -q -m "Edit the draft"
+git merge review-notes
+Write-Output (git diff --name-only --diff-filter=U)
+~~~
+
+~~~text
+Output:
+
+draft.txt
+~~~
+
+`--diff-filter=U` lists only the files that are still in conflict. It's a quick way to see what remains before you resolve it.
+
 ## Try it
 
 This exercise makes both edits, merges them, and prints the status mark. The check compares the line.

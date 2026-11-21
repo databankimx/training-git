@@ -39,6 +39,33 @@ The subject is the line you see in `git log --oneline` and most tools. The body 
 > **Aside: the subject that became a paragraph.**
 > A subject that runs on for a sentence, or a body that's crammed into the subject line, makes every list of history harder to read. Keep the subject to one short line that says what the commit does, and move the reasons into the body.
 
+## Worked example
+
+This example writes a commit with a subject and a body, then prints the subject. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Add-Content -Path "draft.txt" -Value "Second line"
+git add draft.txt
+git commit -q -m "Add second line" -m "The second line gives the draft an example of a longer change."
+Write-Output (git log -1 --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add second line
+~~~
+
+A second `-m` adds a body, which is a paragraph after the subject with a blank line between them. The subject should say what the change does, and the body should say why.
+
 ## Try it
 
 This exercise writes a commit with a subject and a body, then prints both parts. The check compares the two lines.

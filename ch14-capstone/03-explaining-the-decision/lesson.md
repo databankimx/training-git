@@ -55,6 +55,41 @@ Bob approved the draft, and Alice's review is still open, so the status records 
 > **Aside: the message that only says resolved.**
 > A subject such as `Resolve conflict` tells the next reader that a conflict existed, and nothing about the decision. Name what the document now says, and put the reason in the body.
 
+## Worked example
+
+This example merges a branch, then lists only the commits on main, skipping the commits that came in from the branch. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c review-notes
+Set-Content -Path "notes.txt" -Value "Review notes"
+git add notes.txt
+git commit -q -m "Add review notes"
+git switch -q main
+Set-Content -Path "other.txt" -Value "Other work"
+git add other.txt
+git commit -q -m "Add other work"
+git merge -q --no-edit review-notes
+Write-Output (git log --first-parent --format=%s)
+~~~
+
+~~~text
+Output:
+
+Merge branch 'review-notes'
+Add other work
+Add draft
+~~~
+
+`--first-parent` follows the branch you were on, and it skips the commits that came in from a merged branch. It shows the main line of decisions, and the merge commit records where the branch joined.
+
 ## Try it
 
 This exercise repeats the two edits and the conflict, resolves it with the combined text, and prints the first-parent subjects and the reason. The check compares the four lines.

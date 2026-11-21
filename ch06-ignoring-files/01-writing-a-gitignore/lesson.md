@@ -39,6 +39,29 @@ The log file is gone from the status, and the `.gitignore` itself appears, becau
 > **Aside: a pattern that matches more than you meant.**
 > `*.log` matches a file called `error.log` in any folder, and also one called `important.log` that you might have wanted to keep. Patterns are broad by design. Write the most specific pattern that does the job, and check `git status` after each change to see what it hides.
 
+## Worked example
+
+This example writes a `.gitignore` file that ignores log files, then creates a log file. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path ".gitignore" -Value "*.log"
+Set-Content -Path "build.log" -Value "Build output"
+Write-Output (git status --short)
+~~~
+
+~~~text
+Output:
+
+?? .gitignore
+~~~
+
+`.gitignore` lists patterns Git should skip. `*.log` matches every file that ends in `.log`, so `build.log` doesn't appear in the status. The `.gitignore` file itself is untracked until you commit it.
+
 ## Try it
 
 This exercise writes a `.gitignore`, creates a log file and a README, and prints the short status. The log file must be hidden, and the other two files must show.

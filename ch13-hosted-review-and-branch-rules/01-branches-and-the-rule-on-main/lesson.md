@@ -24,6 +24,31 @@ Output:
 feature/hosted-review
 ~~~
 
+## Worked example
+
+This example makes a branch for a typo fix, then prints its name. The work stays off `main`, as a protected branch requires. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c hotfix-typo
+Write-Output (git branch --show-current)
+~~~
+
+~~~text
+Output:
+
+hotfix-typo
+~~~
+
+The change goes on its own branch, so `main` stays clean. Protected branches work the same way: the host refuses a direct commit to `main`, so the change has to be proposed from a branch.
+
 ## Try it
 
 This exercise creates a branch, commits on it, and prints the branch name. Your script must:

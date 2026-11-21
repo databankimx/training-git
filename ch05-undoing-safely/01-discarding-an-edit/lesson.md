@@ -41,6 +41,32 @@ The extra line is gone, and the file reads as it did at the last commit. Git can
 > **Aside: the restore that didn't ask.**
 > `git restore` doesn't confirm before it discards, and it doesn't move anything to a safe place. That's efficient on a good day, and it's why the diff should always be read first. If you're unsure whether a change matters, save a copy of the file, then restore it.
 
+## Worked example
+
+This example discards an unwanted edit, then prints the file to confirm it is back to its committed text. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Add-Content -Path "draft.txt" -Value "Unwanted line"
+git restore draft.txt
+Get-Content draft.txt
+~~~
+
+~~~text
+Output:
+
+Hello
+~~~
+
+`git restore` copies the committed version of the file back over your edit. The edit is lost, so use it only when you don't want the change.
+
 ## Try it
 
 This exercise commits a README, adds a line by mistake, and restores the file. The check compares the file's text.
