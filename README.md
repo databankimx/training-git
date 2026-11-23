@@ -94,16 +94,6 @@ The reader sets a practice identity, `Practice Learner`, for every run. It belon
 
 No exercise needs an account, a token, or a password. Every exercise uses a local remote, which is a bare repository inside the practice folder. Chapter 10 has an optional section on pushing to a hosting service you already use, with your own account. The reader never asks for, stores, or displays a credential, and that section has no exercise and no check.
 
-## Conventions used in this tutorial
-
-The lessons follow a few rules that make documents easier to review:
-
-- Use hyphens, not em dashes.
-- Use plain text symbols, not emojis.
-- End each lesson with a horizontal rule.
-
-These are good habits in any document, not only in this tutorial.
-
 ## Folder layout
 
 - `setup.ps1` prepares the reader and checks the tools it needs.
