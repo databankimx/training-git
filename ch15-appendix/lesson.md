@@ -106,7 +106,7 @@ Each term lists the chapter where it's introduced.
 - **Diff.** A comparison that shows the lines removed and added. *Chapter 4.*
 - **Fast-forward.** A merge that moves a branch name forward, with no merge commit. *Chapter 8.*
 - **Fetch.** Bringing in commits from a remote without changing your branches. *Chapter 10.*
-- **First parent.** The chain of commits along the branch you were on, skipping merged branches. *Chapter 13.*
+- **First parent.** The chain of commits along the branch you were on, skipping merged branches. *Chapter 14.*
 - **HEAD.** The commit you're currently on, usually the tip of the current branch. In a conflict marker, it names the branch you were on. *Chapter 9.*
 - **Identity.** The name and email address written into each commit. *Chapter 1.*
 - **Index.** The staging area, which holds the changes the next commit will include. *Chapter 3.*

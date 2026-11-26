@@ -62,6 +62,28 @@ Learn the first three now. The others make sense once you've seen the three area
 > **Aside: the status that changes when you look.**
 > `git status` doesn't change your files, but it may update Git's own index, which records what's in the working folder. You can run it as often as you like without harm, and that's one reason it's the safe command to reach for when you're unsure.
 
+## Worked example
+
+This example creates a different file and reads its status. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "notes.txt" -Value "First draft"
+Write-Output (git status --short)
+~~~
+
+~~~text
+Output:
+
+?? notes.txt
+~~~
+
+`Set-Content` creates the file with its text. `git status --short` prints one line per changed file. `??` means the file is untracked, which means Git hasn't been told to track it yet.
+
 ## Try it
 
 This exercise adds a Markdown file to the practice repository, then prints the short status. The check compares the line.

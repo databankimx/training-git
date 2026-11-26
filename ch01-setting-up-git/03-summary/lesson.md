@@ -12,6 +12,31 @@ Git is installed, and it knows who you are. You can check for it from a script, 
 - `git config --global` changes your own account. Without it, the setting applies to one repository only.
 - `git init -q -b main` makes a repository quietly, with its first branch named `main`.
 
+## Worked example
+
+This example combines the two checks: a program check, then a folder with an identity. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+if (Get-Command node -ErrorAction SilentlyContinue) {
+    Write-Output "Node.js is installed"
+}
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Write-Output "Email: $(git config user.email)"
+~~~
+
+~~~text
+Output:
+
+Node.js is installed
+Email: example@example.invalid
+~~~
+
+The first `if` prints only when Node.js is found, so its line is missing on a machine without it. The second part sets the folder, creates the repository, and prints the email. The output depends on what is installed on your machine.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

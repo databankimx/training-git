@@ -31,6 +31,34 @@ A protected main keeps the history of the shared work reliable. Everyone reads `
 
 Before a branch is proposed, confirm that you're on it, and not on `main`. This exercise checks that habit: a script that refuses to treat `main` as ready for review, and reports the branch when it's ready.
 
+## Worked example
+
+This example creates a feature branch and lists the commits it adds to main, which is the first thing to check before a change is proposed. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c feature-search
+Add-Content -Path "draft.txt" -Value "Search notes"
+git add draft.txt
+git commit -q -m "Add search notes"
+Write-Output (git log main..feature-search --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add search notes
+~~~
+
+The change goes on `feature-search`, and `main` stays as it was. The host can refuse a direct push to a protected `main`, so changes arrive through a proposal instead, as Chapter 13 describes.
+
 ## Try it
 
 This exercise creates a branch with one commit, then checks whether the current branch is ready to propose. The check compares the line.

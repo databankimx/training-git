@@ -14,6 +14,32 @@ You can check the state of your work before you start, pull before you push, and
 - Review happens through pull requests on many teams. That's a feature of the hosting service, and the habits under it are Git's.
 - The team's own tools and rules apply to every shared change, and they're the first thing to check when you're unsure.
 
+## Worked example
+
+This example checks that the folder is clean, and prints a message only when it is. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+if (-not (git status --short)) {
+    Write-Output "Status: clean"
+}
+~~~
+
+~~~text
+Output:
+
+Status: clean
+~~~
+
+With no changes, `git status --short` prints nothing, so `-not` makes the `if` block run. Run this before you start work, so you know the folder holds only what you expect.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

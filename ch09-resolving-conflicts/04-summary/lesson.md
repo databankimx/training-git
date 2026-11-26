@@ -14,6 +14,39 @@ You can recognize a conflict, read the markers Git writes into the file, and res
 - `*> $null` discards everything a command prints, which is useful when the file is the only output you want.
 - The conflict is a question about the work, and the person who knows the work should answer it.
 
+## Worked example
+
+This example starts a conflicting merge, then prints the status, which marks the conflicted file. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c feature-search
+Set-Content -Path "draft.txt" -Value "Search version"
+git add draft.txt
+git commit -q -m "Change draft on the branch"
+git switch -q main
+Set-Content -Path "draft.txt" -Value "Main version"
+git add draft.txt
+git commit -q -m "Change draft on main"
+git merge feature-search
+Write-Output (git status --short)
+~~~
+
+~~~text
+Output:
+
+UU draft.txt
+~~~
+
+`UU` means both sides changed the file, and it's still unresolved. Git lists it until you resolve it and stage the result.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:
@@ -49,7 +82,7 @@ You finish editing a conflicted file, but git status still lists it as UU. What 
 
 ```quiz
 You started a merge, then decided it shouldn't happen yet. What is the safe way out?
-○ git merge --abort, which undoes the merge in progress and restores the files.
+◉ git merge --abort, which undoes the merge in progress and restores the files.
 → Right. Abort returns the branch to its state before the merge began.
 ○ git reset --hard, which throws everything away and starts again.
 → That discards more than the merge, and it's the command the undoing chapter warned about.

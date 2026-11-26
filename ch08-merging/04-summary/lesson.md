@@ -13,6 +13,39 @@ You can bring a branch into `main` in two ways, and you can tell which one happe
 - Pull requests, protected branches, and codeowners are features of the hosting service, not of Git. Other hosts have similar features under other names.
 - Check that you're on a branch, and not on `main`, before you propose a change.
 
+## Worked example
+
+This example merges a branch with a merge commit, and prints the branch you end up on. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c feature-search
+Add-Content -Path "draft.txt" -Value "Search notes"
+git add draft.txt
+git commit -q -m "Add search notes"
+git switch -q main
+Set-Content -Path "other.txt" -Value "Other work"
+git add other.txt
+git commit -q -m "Add other work"
+git merge -q --no-edit feature-search
+Write-Output (git branch --show-current)
+~~~
+
+~~~text
+Output:
+
+main
+~~~
+
+Merging brings the branch's changes into the branch you're on, which is `main` here. The branch you merged from keeps its commits.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

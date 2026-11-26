@@ -1,0 +1,9 @@
+{
+  "title": "Summary: Hosted Review and Branch Rules",
+  "runtime": "powershell",
+  "minutes": 20,
+  "objective": "Create a feature branch, commit a change, and print the current branch and the commits the branch adds to main.",
+  "prerequisites": ["Required Checks and Codeowners"],
+  "resetOnCheck": true,
+  "hint": "Repeat the setup: main with README, then git switch -q -c feature/hosted-review and the Hosted review note commit. Then Write-Output (git branch --show-current) and Write-Output (git log main..feature/hosted-review --format=%s)."
+}

@@ -62,6 +62,41 @@ Add practice notes
 > **Aside: the push that was refused.**
 > A push is refused when the shared copy has commits you don't have. Git says the push is not a fast-forward. The fix is the same as before: fetch, combine the work, and push again. Pushing with force to get past the refusal would overwrite someone else's work, so don't do it.
 
+## Worked example
+
+This example counts the commits the shared copy has that you don't, after a second copy has pushed a change. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git init -q --bare shared.git
+git remote add origin shared.git
+git push -q -u origin main
+git clone -q shared.git copy
+Set-Location copy
+Set-Content -Path "other.txt" -Value "Teammate change"
+git add other.txt
+git commit -q -m "Add teammate change"
+git push -q
+Set-Location ..
+git fetch -q origin
+Write-Output "Behind: $(git rev-list --count HEAD..origin/main)"
+~~~
+
+~~~text
+Output:
+
+Behind: 1
+~~~
+
+`git fetch` downloads the shared commits without changing your files. `HEAD..origin/main` lists the commits the shared copy has that you lack, and `--count` counts them.
+
 ## Try it
 
 This exercise makes a shared copy, clones it, has the clone push a change, and pulls that change into the original. The check compares both lines.

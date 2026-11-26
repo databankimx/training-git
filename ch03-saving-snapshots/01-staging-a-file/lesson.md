@@ -51,6 +51,29 @@ Nothing in the output says the file is only staged, so the `A` is the thing to r
 > **Aside: adding everything, and why it's risky.**
 > `git add .` stages every change in the folder, including any file you didn't mean to include. It's quick, and it's how people accidentally commit a file that shouldn't be in the repository. Name the files you want, or check `git status --short` before you add everything. Chapter 6 covers files that should never be added at all.
 
+## Worked example
+
+This example creates a different file, stages it, and reads the status after staging. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+Write-Output (git status --short)
+~~~
+
+~~~text
+Output:
+
+A  draft.txt
+~~~
+
+`git add` moves the file to the staging area, and the status shows `A` for added. The two spaces after `A` are part of the output.
+
 ## Try it
 
 This exercise creates a file, stages it, and prints the short status. The check compares the line.

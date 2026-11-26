@@ -1,0 +1,9 @@
+{
+  "title": "Branches and the Rule on Main",
+  "runtime": "powershell",
+  "minutes": 15,
+  "objective": "Commit the README on main, switch to a feature branch, commit a change, and print the branch name.",
+  "prerequisites": ["Summary: Working Together"],
+  "resetOnCheck": true,
+  "hint": "Commit the README on main with git init -q -b main, then git switch -q -c feature/hosted-review. Add-Content the Hosted review note line, git add, git commit -q -m Add hosted review note. Then Write-Output (git branch --show-current)."
+}

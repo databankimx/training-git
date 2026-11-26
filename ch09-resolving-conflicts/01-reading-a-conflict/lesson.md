@@ -54,6 +54,43 @@ Both versions are in the file, between the markers, and the merge is waiting for
 > **Aside: the merge message you'll never need.**
 > A conflicted merge prints a message that names the conflicted file and says the automatic merge failed. It's accurate, and `git status` says the same thing more usefully. Read the file, then the status, and you won't need the message.
 
+## Worked example
+
+This example makes a conflict on purpose, then prints the file so you can read the markers. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c feature-search
+Set-Content -Path "draft.txt" -Value "Search version"
+git add draft.txt
+git commit -q -m "Change draft on the branch"
+git switch -q main
+Set-Content -Path "draft.txt" -Value "Main version"
+git add draft.txt
+git commit -q -m "Change draft on main"
+git merge feature-search
+Get-Content draft.txt
+~~~
+
+~~~text
+Output:
+
+<<<<<<< HEAD
+Main version
+=======
+Search version
+>>>>>>> feature-search
+~~~
+
+Git stops the merge and writes both versions into the file. The part between `<<<<<<< HEAD` and `=======` is your side, and the part after is the branch's side.
+
 ## Try it
 
 This exercise sets up the two branches, merges them, and prints the conflicted file. The check compares the four lines of the file.

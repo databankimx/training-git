@@ -54,6 +54,26 @@ If the answer is `False`, the repository wasn't made here. Check your location a
 > **Aside: the folder that was already a repository.**
 > Running `git init` in a folder that's already a repository is harmless. Git reports that it reinitialized the existing repository, and nothing in the history changes. It's a good way to check whether a folder is tracked, but a command that looks for `.git` is clearer, and it doesn't create anything.
 
+## Worked example
+
+This example makes a repository with a different branch name, then checks for a folder named `notes`. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b trunk
+New-Item -ItemType Directory -Force -Path "notes" | Out-Null
+Write-Output "Notes folder exists: $(Test-Path "notes")"
+~~~
+
+~~~text
+Output:
+
+Notes folder exists: True
+~~~
+
+`-b trunk` names the first branch `trunk` rather than `main`. `Test-Path` returns `True` for any file or folder that exists, and `False` when it doesn't.
+
 ## Try it
 
 This exercise moves to the practice folder, makes the repository, and prints whether the `.git` folder is there. The check compares the line.

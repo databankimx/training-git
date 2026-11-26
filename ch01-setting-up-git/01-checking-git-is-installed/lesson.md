@@ -54,6 +54,26 @@ Git is installed
 
 If Git were missing, the script would print nothing, which is the honest answer. A script that needs Git should say so when it's absent, and the setup script does exactly that.
 
+## Worked example
+
+This example checks for a different program, Node.js, so you can see the same `if` line on its own. It doesn't need a repository. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+if (Get-Command node -ErrorAction SilentlyContinue) {
+    Write-Output "Node.js is installed"
+} else {
+    Write-Output "Node.js is missing"
+}
+~~~
+
+~~~text
+Output:
+
+Node.js is installed
+~~~
+
+`Get-Command` looks for the program. If it finds one, the first branch of the `if` runs. Otherwise the `else` branch runs. The `-ErrorAction SilentlyContinue` hides the error when nothing is found.
+
 ## Try it
 
 This exercise checks for Git in a script, and prints one line if it's there. The check compares the line.

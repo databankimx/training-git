@@ -50,9 +50,35 @@ Nothing beyond the setup script. It installs Git, PowerShell 7, and the reader, 
 
 Git will happily commit anything you tell it to, including a password, a key, or a file that belongs to someone else. The team's policy decides what may be committed, and you should check it before you commit anything you're unsure about. Chapter 6 covers the habits that keep the wrong file out of a repository.
 
+## The PowerShell you'll need
+
+You don't need the PowerShell tutorial first. This section covers every PowerShell form the exercises use, so you can follow them without it. The PowerShell tutorial goes deeper, and it's worth reading later.
+
+A script is a list of lines, and PowerShell runs them from top to bottom. A line is a command, which may have options and values. Git lines start with `git`. PowerShell's own commands are named as a verb and a noun, joined by a dash, so `Set-Location` sets the current folder.
+
+| Form | What it does |
+|---|---|
+| `Set-Location "C:\Development\git-practice"` | Moves to that folder. Every exercise starts this way. |
+| `Set-Content -Path file -Value "text"` | Creates a file, or replaces its contents, with the text. |
+| `Add-Content -Path file -Value "text"` | Adds the text as a new line at the end of a file. |
+| `Get-Content file` | Prints the lines of a file. |
+| `Write-Output (command)` | Prints what the command produces. The brackets make PowerShell run the command first. |
+| `$(command)` | Runs the command and puts its output inside a line of text, such as `Behind: $(git rev-list --count HEAD..origin/main)`. |
+| `New-Item -ItemType Directory -Force -Path folder \| Out-Null` | Creates a folder, if it isn't already there. `Out-Null` hides the report PowerShell would otherwise print. |
+| `Test-Path ".git"` | Prints `True` if a file or folder with that name exists, and `False` if not. |
+| `Get-Command git -ErrorAction SilentlyContinue` | Checks whether a program is installed, and hides the error if it isn't. |
+| `if (condition) { ... }` | Runs the lines inside the braces only when the condition is true. |
+| `-not` | Reverses a condition. `-not (git status --short)` is true when that command prints nothing. |
+| `-eq` | Compares two values, and is true when they are equal. |
+| `git -C "folder" command` | Runs a Git command in another folder, without moving there first. |
+
+Strings go in double quotes. A path that contains a backslash, such as `C:\Development`, is written as it appears on screen, and the examples use the practice folder's full path so you can copy it.
+
+Run (F5) and Check (Ctrl+F5) work as described above. If a line still puzzles you after reading this table, the PowerShell tutorial explains the terminal in more depth.
+
 ## How the tutorial works
 
-Each chapter has a short introduction, a few steps, and a summary with three quizzes. Most steps end with an exercise. You type a script in the Source pane, press Run to see the output, or Check to compare it with the expected result. Commands are typed in PowerShell 7, which the PowerShell tutorial teaches, so if a line puzzles you, that tutorial covers the terminal.
+Each chapter has a short introduction, a few steps, and a summary with three quizzes. Most steps end with an exercise. You type a script in the Source pane, press Run to see the output, or Check to compare it with the expected result. Commands are typed in PowerShell 7, and the PowerShell section above covers every PowerShell form the exercises use.
 
 When you're ready, move on to Chapter 1.
 

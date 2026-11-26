@@ -45,6 +45,31 @@ Use a short name that says what the work is for, such as `notes`, `fix-typo`, or
 > **Aside: the branch that matches its work.**
 > A branch name is not a permanent label, and you can rename or delete a branch later. Still, a name that describes the work makes the list of branches readable for everyone on the team, and it's the one thing they see before they open the commits.
 
+## Worked example
+
+This example creates a branch named for a different feature, then prints the branch you are on. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -c feature-search
+Write-Output (git branch --show-current)
+~~~
+
+~~~text
+Output:
+
+feature-search
+~~~
+
+`git switch -c` creates the branch and moves you onto it. `git branch --show-current` prints the name of the branch you're on.
+
 ## Try it
 
 This exercise commits a README on `main`, creates a `notes` branch, and prints the current branch. The check compares the line.

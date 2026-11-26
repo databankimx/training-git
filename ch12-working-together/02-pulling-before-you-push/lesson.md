@@ -46,6 +46,41 @@ The push was accepted, because your history now includes everything on the share
 > **Aside: the push that is refused for a good reason.**
 > A refused push is not an error to fight. It means someone else's work is on the shared copy that you haven't seen. Pull, read what came in, and push again. Forcing the push would replace their commits with yours, and that is the one thing a shared branch must never allow.
 
+## Worked example
+
+This example pulls a teammate's commit into a clone before pushing, then prints the latest subject. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git init -q --bare shared.git
+git remote add origin shared.git
+git push -q -u origin main
+git clone -q shared.git copy
+Set-Location copy
+Set-Content -Path "other.txt" -Value "Teammate change"
+git add other.txt
+git commit -q -m "Add teammate change"
+git push -q
+Set-Location ..
+git pull -q --ff-only origin main
+Write-Output (git log -1 --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add teammate change
+~~~
+
+`--ff-only` brings the shared commits in only when your copy can move forward cleanly. If the histories have diverged, Git refuses rather than guessing, and you resolve that yourself.
+
 ## Try it
 
 This exercise sets up a shared copy and a clone, has the clone push a teammate's change, then pulls it into the original, adds its own change, and pushes. The check compares the three lines.

@@ -62,6 +62,39 @@ Two parents is the mark of a merge. A normal commit has one, and the first commi
 > **Aside: what the merge commit doesn't contain.**
 > A merge commit records the combination, and it doesn't hold any new text of its own, unless the merge had to resolve a conflict. The changes come from the two parents. That's why a merge commit with no conflicts is easy to review: there is nothing new to read in it.
 
+## Worked example
+
+This example merges two branches that each added a commit, which makes a merge commit. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+git switch -q -c feature-search
+Add-Content -Path "draft.txt" -Value "Search notes"
+git add draft.txt
+git commit -q -m "Add search notes"
+git switch -q main
+Set-Content -Path "other.txt" -Value "Other work"
+git add other.txt
+git commit -q -m "Add other work"
+git merge -q --no-edit feature-search
+Write-Output (git log -1 --format=%s)
+~~~
+
+~~~text
+Output:
+
+Merge branch 'feature-search'
+~~~
+
+Both branches have new commits, so Git can't move `main` forward. It makes a merge commit instead, and `--no-edit` accepts Git's default message rather than opening an editor.
+
 ## Try it
 
 This exercise diverges two branches, merges them, and prints the subject and the parent count of the merge commit. The check compares both lines.

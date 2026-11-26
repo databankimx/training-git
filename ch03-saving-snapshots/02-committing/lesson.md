@@ -53,6 +53,30 @@ With `-q`, the refusal is silent, so check `git status --short` to see why nothi
 > **Aside: the message that explains nothing.**
 > A message such as `update` or `fix` tells the next reader nothing. Write the subject as a short instruction that says what the commit does, such as `Add practice notes`. Chapter 11 covers messages in more detail, and the habit starts now.
 
+## Worked example
+
+This example stages a different file and commits it with its own message. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Write-Output (git log --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add draft
+~~~
+
+`git commit -q -m` records the snapshot with the message after `-m`, and `-q` keeps Git quiet. `git log --format=%s` prints only the subject of each commit.
+
 ## Try it
 
 This exercise creates a file, stages it, commits it with a message, and prints the subject from the log. The check compares the line.

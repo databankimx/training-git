@@ -59,6 +59,31 @@ The added line starts with `+`, and the unchanged line above it shows where the 
 > **Aside: the change you forgot to stage.**
 > A diff with no output can mean nothing changed, or that the change is already staged. `git diff` shows only unstaged changes. Chapter 4, step 2 covers the staged side, so if a diff seems empty when you expect a change, check the staged side before you assume the edit was lost.
 
+## Worked example
+
+This example changes a committed file, then lists the changed file names without staging anything. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Add-Content -Path "draft.txt" -Value "More text"
+Write-Output (git diff --name-only)
+~~~
+
+~~~text
+Output:
+
+draft.txt
+~~~
+
+`git diff` compares your folder with the last commit. `--name-only` prints just the file names, so you see which files changed without the line detail.
+
 ## Try it
 
 This exercise commits a README, edits it, and prints the name of the file that changed. The check compares the line.

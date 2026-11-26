@@ -55,6 +55,32 @@ The summary has the file, the number of changed lines, and a total. Read it as a
 > **Aside: the diff that is empty for the wrong reason.**
 > If `git diff` is empty and `git diff --staged` shows nothing, the change may never have been saved in the working folder, or it may have been committed already. Check `git status --short` to see where the file stands. The three comparisons, working folder, staging area, and last snapshot, answer different questions, and knowing which one you're in is most of the skill.
 
+## Worked example
+
+This example stages a change, then compares the staging area with the last commit. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Add-Content -Path "draft.txt" -Value "More text"
+git add draft.txt
+Write-Output (git diff --staged --name-only)
+~~~
+
+~~~text
+Output:
+
+draft.txt
+~~~
+
+`--staged` compares the staging area with the last commit, instead of comparing your folder. After `git add`, the change appears in `--staged` and no longer appears in a plain `git diff`.
+
 ## Try it
 
 This exercise commits a README, edits it, stages the edit, and prints the staged summary. The check compares both lines.

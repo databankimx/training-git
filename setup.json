@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "name": "Git Basics",
+  "folder": "training-git",
+  "repoUrl": "https://github.com/databankimx/training-git.git",
+  "branch": "main",
+  "baseDirectory": "C:\\Development\\training",
+  "runTests": true,
+  "installs": {
+    "git": { "install": true, "winget": "Git.Git" },
+    "powershell7": { "install": true, "pinned": "7", "winget": "Microsoft.PowerShell" },
+    "node": { "install": true, "pinned": "24", "orNewer": true, "winget": "OpenJS.NodeJS.LTS" },
+    "vcRuntime": { "install": true },
+    "vscode": { "install": true, "winget": "Microsoft.VisualStudioCode", "extensions": [] },
+    "notepadPlusPlus": { "install": false, "winget": "Notepad++.Notepad++" },
+    "buildTools": { "install": false }
+  },
+  "steps": [
+    {
+      "name": "Reader packages",
+      "type": "npm",
+      "folder": "lesson-runner",
+      "command": "ci",
+      "requires": [ "node" ]
+    },
+    {
+      "name": "Reader tests",
+      "type": "npm-run",
+      "folder": "lesson-runner",
+      "script": "test",
+      "runTests": true,
+      "requires": [ "node" ]
+    }
+  ],
+  "launch": {
+    "ide": "vscode",
+    "kind": "electron",
+    "folder": "lesson-runner"
+  }
+}

@@ -13,6 +13,29 @@ You can write a `.gitignore` that hides the files a repository shouldn't track, 
 - Passwords, tokens, private keys, and environment files are secrets, and they never go into a repository.
 - A committed secret is handled by telling the repository's maintainers straight away, and by treating the secret as compromised. The team's policy says who to tell.
 
+## Worked example
+
+This example ignores a log file and shows that the status no longer lists it. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path ".gitignore" -Value "*.log"
+Set-Content -Path "app.log" -Value "Started"
+Write-Output "Ignored: $(git check-ignore app.log)"
+~~~
+
+~~~text
+Output:
+
+Ignored: app.log
+~~~
+
+The `$(...)` puts the output of `git check-ignore` inside the line. If the file weren't ignored, the output would be empty and the line would end after `Ignored: `.
+
 ## Try it
 
 This exercise puts the chapter together. Your script must:

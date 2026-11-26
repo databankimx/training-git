@@ -13,6 +13,34 @@ You can stage a file, commit it with a message, and read the history. A commit i
 - A good message is a short instruction, such as `Add practice notes`, and it's the first thing a reader sees.
 - `git log --format=%s` prints each commit's subject, newest first, without the changing hash.
 
+## Worked example
+
+This example makes two commits, then prints both subjects. Each commit adds a different line to the same file. It runs in a scratch folder, so the practice folder is untouched. Read it, then write your own script in the practice folder.
+
+~~~powershell
+New-Item -ItemType Directory -Force -Path "C:\Development\scratch-example" | Out-Null
+Set-Location "C:\Development\scratch-example"
+git init -q -b main
+git config user.name "Example Person"
+git config user.email "example@example.invalid"
+Set-Content -Path "draft.txt" -Value "Hello"
+git add draft.txt
+git commit -q -m "Add draft"
+Add-Content -Path "draft.txt" -Value "A second line"
+git add draft.txt
+git commit -q -m "Add second line"
+Write-Output (git log --format=%s)
+~~~
+
+~~~text
+Output:
+
+Add second line
+Add draft
+~~~
+
+`Add-Content` appends a line to a file rather than replacing it. The log lists the newest commit first.
+
 ## Try it
 
 This exercise makes two commits in the practice repository, then prints the subjects. Your script must:

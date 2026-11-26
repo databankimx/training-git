@@ -16,7 +16,7 @@ The tutorial assumes no programming background, and it doesn't assume the learne
 
 ## Prerequisites
 
-The setup script installs everything the tutorial needs, so a learner doesn't have to complete the other tutorials first. The Markdown and PowerShell tutorials are recommended reading, and the Git tutorial links to them where a lesson depends on them: the examples edit Markdown files, and the commands are typed in PowerShell 7.
+The setup script installs everything the tutorial needs, so a learner doesn't have to complete the other tutorials first. The Markdown tutorial is recommended reading, and the Git tutorial links to it where a lesson depends on it: the examples edit Markdown files. The commands are typed in PowerShell 7, and the introduction covers every PowerShell form the exercises use, so the PowerShell tutorial is optional.
 
 ## Scope
 
@@ -38,7 +38,7 @@ In scope:
 
 Out of scope:
 
-- the features of any particular hosting service, such as its web interface, its pull request screens, or its access rules. The lessons are generic and apply to any host
+- the screens, menus, and settings of any particular hosting service. Chapter 13 teaches the concepts of hosted review and branch rules, which most hosts implement, and it describes no host's interface. The lessons apply to any host
 - rebasing and interactive rewriting of history, which are covered as a warning only
 - Git internals such as objects and packfiles, beyond one introductory aside
 - submodules, LFS, and hooks
@@ -112,7 +112,9 @@ Each chapter has a short introduction, a few steps, and a summary with three qui
 
 **Chapter 12. Working together.** Checking before you start, pulling before you push, what review of a change means, and how the team's own tools and rules apply. Exercise: pull a teammate's change, then print the log. No new commands.
 
-**Chapter 13. Capstone.** A small shared document: several people edit a Markdown file on branches, a conflict appears, the conflict is resolved, and the history explains the decisions. The exercise is the resolved history, checked by output.
+**Chapter 13. Hosted review and branch rules (optional).** The rules a hosting service lets a team add on top of Git: a proposed change that others review before it reaches a shared branch, branch protection that refuses direct commits to `main`, required checks that must pass before a change can be approved (such as a coding-standards check, a static analysis scan, or a dependency vulnerability scan), a codeowners file that names who must review changes to which paths, and limits on who may create repositories. The chapter presents these as concepts, with generic examples that use placeholder names. Many hosting services offer these rules, including Bitbucket, GitLab, and GitHub, and they use different names for the same ideas. The chapter uses GitHub's terms, because GitHub is widely used and it is the organization's choice, and it says that other hosts work the same way in principle. It says that an organization's rules belong to that organization, that a reader follows the rules and standards of their own organization, and that the learner should ask the team which of these apply. It describes no host's screens or settings, and it names no internal host, team member, or repository. Exercise: create a branch, commit on it, and print the current branch and the commits it has beyond `main`. Nothing is pushed, and no host is needed. Hosted features are not checked, because they depend on the host and the team.
+
+**Chapter 14. Capstone.** A small shared document: several people edit a Markdown file on branches, a conflict appears, the conflict is resolved, and the history explains the decisions. The exercise is the resolved history, checked by output.
 
 **Appendix.** A one-page cheat sheet, a glossary that points to the chapter where each term appears, and a section on what to do when Git won't behave.
 
@@ -137,7 +139,7 @@ The setup script doesn't ask for any account or credential, and it doesn't creat
 2. **Checks.** Output, files, and the repeatable Git output described above.
 3. **Chapters 0 to 4.** Introduction through seeing changes, with exercises and quizzes, tested on a clean machine.
 4. **Chapters 5 to 9.** Undoing through conflicts.
-5. **Chapters 10 to 13 and the appendix.** Sharing through the capstone, including the optional hosted-remote section.
+5. **Chapters 10 to 14 and the appendix.** Sharing through the capstone, including the optional hosted-remote section in Chapter 10 and the optional Chapter 13.
 6. **Setup and quickstart.** Written: `setup.ps1`, `README.md`, and `QUICKSTART.md`. The setup script still needs a run on a clean machine with nothing else installed.
 7. **Publish.** Repository content reviewed, `resources/` ignored, and pushed to GitHub.
 
@@ -164,8 +166,17 @@ Settled during the design:
 
 12. **The tutorial's own folders are ignored in reader runs.** Testing showed that the bare `shared.git` folder and the `clone` folder appeared as untracked files in `git status`, so a status check on a clean repository failed. The reader now writes an ignore file, listing those two folders, and passes it to Git on every run, through `core.excludesFile`. The setting applies only to the reader's runs, and the local-remote section of Chapter 10 says so.
 13. **Reset per step.** Every Git step sets `resetOnCheck` in its `lesson.json`, so Check always starts with no repository, even where the step has no files expectation. Run keeps the repository. The reader's PowerShell rules are unchanged, because the flag defaults to off.
-14. **Capstone shape.** Chapter 13 tells one story, Alice and Bob editing one status line on separate branches, with a conflict and a resolution whose reason is written in the commit body. It uses local branches, so every step can be checked. The chapter describes the team's clone and pull request process in words, and the summary checks the resolved document and the first-parent history.
+14. **Capstone shape.** Chapter 14 tells one story, Alice and Bob editing one status line on separate branches, with a conflict and a resolution whose reason is written in the commit body. It uses local branches, so every step can be checked. The chapter describes the team's clone and pull request process in words, and the summary checks the resolved document and the first-parent history.
 15. **Setup script.** `setup.ps1` is the PowerShell tutorial's script, with this tutorial's repository address and folder. It installs Git, PowerShell 7, Node.js, and the Build Tools fallback, and it doesn't touch global Git settings.
+
+Added after review:
+
+16. **Hosted review (amends decisions 3 and 11).** Hosted review and branch rules are taught as concepts in an optional Chapter 13, not in a separate tutorial. Git itself still has no pull requests, protected branches, or codeowners, and the chapter says so. It names no host's screens or settings, and its only exercise is local. Hosted features are not checked. The team's rules apply, and the chapter says so.
+
+17. **Organization-specific rules (added after review).** Chapter 13 uses one organization's setup as its example of what hosted rules can contain: no direct commits to `main`, a pull request before any merge, required scans before approval, a codeowners file, and repositories created by administrators only. The examples were checked against a real repository's `.github` folder, but the lessons use placeholder names only. The chapter says that such rules belong to the organization that sets them, and that a reader outside a company follows their own organization's rules and standards. The lessons name no internal host, team member, or repository, because the collection's public repositories must not carry internal hosts or policy text. The GitHub terms are used for the concepts only, with no description of GitHub's screens.
+18. **Screens and public repositories (added after review).** The training repositories and the practice templates are public on github.com under the MIT license, so anything in them is visible to anyone. Chapter 13 shows GitHub screens only from a personal practice repository on github.com, never from the organization's own GHE instance. The organization's rules are explained in words, with the reason for each, and no screenshot shows its settings, host, or team. Screenshots of GitHub's screens are dated, because the interface changes, and each one is tracked in the missing-screenshots file like the other courses.
+
+19. **PowerShell not assumed (added after review).** Learners may not have completed the PowerShell tutorial. The introduction covers every PowerShell form the exercises use, in a table, and no lesson depends on that tutorial. The PowerShell tutorial is recommended for more depth, but it is not a prerequisite.
 
 ---
 
