@@ -3,7 +3,7 @@
   "name": "Git Basics",
   "folder": "training-git",
   "repoUrl": "https://github.com/databankimx/training-git.git",
-  "branch": "dev",
+  "branch": "main",
   "baseDirectory": "C:\\Development\\training",
   "runTests": true,
   "installs": {
